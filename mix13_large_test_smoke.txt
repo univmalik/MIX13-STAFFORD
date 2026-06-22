@@ -1,0 +1,95 @@
+Mix13 Large Statistical Differential Test
+=========================================
+discovery samples per alpha = 2^10 = 1024
+validation samples/campaign = 2^10 = 1024
+campaigns = 1
+validation total/alpha = 1024
+threads = 2
+top beta candidates = 2
+output file = mix13_large_test_smoke.txt
+mix13(0) = 0x0000000000000000 (must be 0)
+mix13(1) = 0x5692161d100b05e5
+
+============================================================
+ALPHA: 0x0008000000200000  label=original report alpha  Hamming weight=2
+After first xor-shift: alpha ^ (alpha >> 30) = 0x0008000000000000  HW=1
+============================================================
+
+[Discovery] alpha=0x0008000000200000  samples=1024  memory=0.0 MiB
+  generated in 0.000 s (3.88 M pairs/s)
+  sorting exact 64-bit differences...
+  sorted in 0.000 s
+  top exact beta candidates:
+    # 1 beta=0x01b76dbb286edb76 hw=36 count=         1 p=9.765625000e-04 log2(p)=-10.00000
+    # 2 beta=0x0287a695700f4d2a hw=27 count=         1 p=9.765625000e-04 log2(p)=-10.00000
+
+[Validation] fixed candidates; no candidate reselection
+
+  Campaign 1  source=fmix64(counter+offset)  N=1024  time=0.000 s  rate=5.45 M pairs/s
+    # 1 beta=0x01b76dbb286edb76 hits=         0 p=0.000000000e+00 log2(p)=-inf
+    # 2 beta=0x0287a695700f4d2a hits=         0 p=0.000000000e+00 log2(p)=-inf
+
+[Combined validation] N=1024
+  # 1 beta=0x01b76dbb286edb76 hw=36 hits=           0 p=0.000000000000e+00 log2(p)=-inf  95% CI=[0.000000000000e+00, 3.737404040018e-03]
+  # 2 beta=0x0287a695700f4d2a hw=27 hits=           0 p=0.000000000000e+00 log2(p)=-inf  95% CI=[0.000000000000e+00, 3.737404040018e-03]
+
+[Final ranking by combined validation]
+  rank  1 beta=0x01b76dbb286edb76 hits=           0 p=0.000000000000e+00
+  rank  2 beta=0x0287a695700f4d2a hits=           0 p=0.000000000000e+00
+
+============================================================
+ALPHA: 0x0200000008000000  label=strong 2-bit candidate  Hamming weight=2
+After first xor-shift: alpha ^ (alpha >> 30) = 0x0200000000000000  HW=1
+============================================================
+
+[Discovery] alpha=0x0200000008000000  samples=1024  memory=0.0 MiB
+  generated in 0.000 s (5.64 M pairs/s)
+  sorting exact 64-bit differences...
+  sorted in 0.000 s
+  top exact beta candidates:
+    # 1 beta=0x121d4a60e43a94c1 hw=25 count=         2 p=1.953125000e-03 log2(p)=-9.00000
+    # 2 beta=0xc4c08700c9810e02 hw=19 count=         2 p=1.953125000e-03 log2(p)=-9.00000
+
+[Validation] fixed candidates; no candidate reselection
+
+  Campaign 1  source=fmix64(counter+offset)  N=1024  time=0.000 s  rate=9.25 M pairs/s
+    # 1 beta=0x121d4a60e43a94c1 hits=         0 p=0.000000000e+00 log2(p)=-inf
+    # 2 beta=0xc4c08700c9810e02 hits=         0 p=0.000000000e+00 log2(p)=-inf
+
+[Combined validation] N=1024
+  # 1 beta=0x121d4a60e43a94c1 hw=25 hits=           0 p=0.000000000000e+00 log2(p)=-inf  95% CI=[0.000000000000e+00, 3.737404040018e-03]
+  # 2 beta=0xc4c08700c9810e02 hw=19 hits=           0 p=0.000000000000e+00 log2(p)=-inf  95% CI=[0.000000000000e+00, 3.737404040018e-03]
+
+[Final ranking by combined validation]
+  rank  1 beta=0x121d4a60e43a94c1 hits=           0 p=0.000000000000e+00
+  rank  2 beta=0xc4c08700c9810e02 hits=           0 p=0.000000000000e+00
+
+============================================================
+ALPHA: 0x8000000200000008  label=stronger 3-bit candidate  Hamming weight=3
+After first xor-shift: alpha ^ (alpha >> 30) = 0x8000000000000000  HW=1
+============================================================
+
+[Discovery] alpha=0x8000000200000008  samples=1024  memory=0.0 MiB
+  generated in 0.000 s (5.53 M pairs/s)
+  sorting exact 64-bit differences...
+  sorted in 0.000 s
+  top exact beta candidates:
+    # 1 beta=0xb3312171666242e0 hw=26 count=         5 p=4.882812500e-03 log2(p)=-7.67807
+    # 2 beta=0x5511e150aa23c2a0 hw=24 count=         3 p=2.929687500e-03 log2(p)=-8.41504
+
+[Validation] fixed candidates; no candidate reselection
+
+  Campaign 1  source=fmix64(counter+offset)  N=1024  time=0.000 s  rate=8.84 M pairs/s
+    # 1 beta=0xb3312171666242e0 hits=         0 p=0.000000000e+00 log2(p)=-inf
+    # 2 beta=0x5511e150aa23c2a0 hits=         0 p=0.000000000e+00 log2(p)=-inf
+
+[Combined validation] N=1024
+  # 1 beta=0xb3312171666242e0 hw=26 hits=           0 p=0.000000000000e+00 log2(p)=-inf  95% CI=[0.000000000000e+00, 3.737404040018e-03]
+  # 2 beta=0x5511e150aa23c2a0 hw=24 hits=           0 p=0.000000000000e+00 log2(p)=-inf  95% CI=[0.000000000000e+00, 3.737404040018e-03]
+
+[Final ranking by combined validation]
+  rank  1 beta=0x5511e150aa23c2a0 hits=           0 p=0.000000000000e+00
+  rank  2 beta=0xb3312171666242e0 hits=           0 p=0.000000000000e+00
+
+Total elapsed time: 0.001 seconds
+Results saved to: mix13_large_test_smoke.txt
