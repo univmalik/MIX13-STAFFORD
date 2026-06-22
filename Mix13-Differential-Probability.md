@@ -48,14 +48,14 @@ $$
 $$
 tested inputs. The measured probability was:
 
-$$
+
 \widehat p
 =
 \frac{4,197,603}{2^{32}}
 =
 9.773306082934\times10^{-4}
 \approx2^{-9.998866}.
-$$
+
 This is extremely close to:
 
 $$
