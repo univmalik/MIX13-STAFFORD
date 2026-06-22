@@ -24,9 +24,9 @@ For each input difference $\alpha$, the accompanying C++ program first discovere
 
 The total validation size for each tested $\alpha$ was:
 
-$$
+```math
 4\cdot2^{30}=2^{32}=4,294,967,296
-$$
+```
 input pairs.
 
 The strongest confirmed differential in the experiment was:
@@ -38,39 +38,39 @@ beta  = 0x53112150a62242a0
 
 with:
 
-$$
+```math
 4,197,603
-$$
+```
 hits among:
 
-$$
+```math
 2^{32}
-$$
+```
 tested inputs. The measured probability was:
 
-
-\widehat p
+```math
+\widehat{p}
 =
 \frac{4,197,603}{2^{32}}
 =
 9.773306082934\times10^{-4}
 \approx2^{-9.998866}.
-
+```
 This is extremely close to:
 
-$$
+```math
 2^{-10},
-$$
+```
 or approximately one occurrence per 1,023 tested inputs.
 
 The same input difference produced eight distinct exact output differences, each with probability close to $2^{-10}$. Their combined measured probability was:
 
-$$
+```math
 \frac{33,557,348}{2^{32}}
 =
 0.007813178934
 \approx2^{-6.999875}.
-$$
+```
 Thus approximately one input pair in 128 produced an output difference belonging to this particular eight-member cluster.
 
 The strongest two-bit input difference tested was:
@@ -82,10 +82,10 @@ beta  = 0x88408901d0811201
 
 with measured probability:
 
-$$
+```math
 4.203915596008\times10^{-4}
 \approx2^{-11.215979}.
-$$
+```
 The results demonstrate that Mix13 contains large and highly structured XOR-differential biases. They do not prove that the identified three-bit differential is the global maximum over all nonzero 64-bit input differences.
 
 ---
@@ -171,32 +171,32 @@ Worker threads                      = 8
 
 For a function:
 
-$$
+```math
 F:\{0,1\}^{64}\rightarrow\{0,1\}^{64},
-$$
+```
 a fixed input XOR difference $\alpha$, and a fixed output XOR difference $\beta$, define:
 
-$$
+```math
 D_\alpha F(x)
 =
 F(x)\oplus F(x\oplus\alpha).
-$$
+```
 The probability of the differential pair $(\alpha,\beta)$ is:
 
-$$
+```math
 \Pr_x[D_\alpha F(x)=\beta].
-$$
+```
 It is important to distinguish between:
 
-$$
+```math
 \Pr_x[D_\alpha F(x)=\beta]
-$$
+```
 for a particular beta and:
 
-$$
+```math
 \max_{\beta\ne0}
 \Pr_x[D_\alpha F(x)=\beta],
-$$
+```
 which is the largest differential probability associated with a fixed alpha.
 
 A valid differential pair is not necessarily the most probable pair for that input difference.
@@ -213,10 +213,10 @@ Mix13 is a permutation because:
 
 For a random 64-bit permutation and fixed nonzero $\alpha$ and $\beta$, the average fixed-pair probability is approximately:
 
-$$
+```math
 \frac{1}{2^{64}-1}
 \approx2^{-64}.
-$$
+```
 This ideal reference is not a claim that every differential-table entry of a random permutation is identical. It is the natural fixed-pair comparison scale.
 
 Against this reference:
@@ -231,16 +231,16 @@ Against this reference:
 
 The first Mix13 operation is:
 
-$$
+```math
 L_{30}(x)=x\oplus(x\gg30).
-$$
+```
 Because this operation is linear with respect to XOR:
 
-$$
+```math
 D_\alpha L_{30}(x)
 =
 \alpha\oplus(\alpha\gg30).
-$$
+```
 This allows external input differences to be selected so that several active bits cancel before the first multiplication.
 
 ### 5.1 Original two-bit input difference
@@ -251,9 +251,9 @@ alpha = 0x0008000000200000
 
 Its active bits are 21 and 51. Since the positions are separated by 30:
 
-$$
+```math
 \alpha\oplus(\alpha\gg30)=2^{51}.
-$$
+```
 Numerically:
 
 ```text
@@ -272,9 +272,9 @@ alpha = 0x0200000008000000
 
 Its active bits are 27 and 57. The first XOR-shift gives:
 
-$$
+```math
 \alpha\oplus(\alpha\gg30)=2^{57}.
-$$
+```
 Numerically:
 
 ```text
@@ -303,35 +303,35 @@ result                 = 0x8000000000000000
 
 Therefore:
 
-$$
+```math
 \alpha\oplus(\alpha\gg30)=2^{63}.
-$$
+```
 The external three-bit input difference collapses exactly to a single most-significant-bit difference.
 
 This alpha can also be derived using the inverse of the XOR-shift. For:
 
-$$
+```math
 L_{30}(x)=x\oplus(x\gg30),
-$$
+```
 the inverse difference transform is:
 
-$$
+```math
 L_{30}^{-1}(y)
 =
 y\oplus(y\gg30)\oplus(y\gg60).
-$$
+```
 Selecting:
 
-$$
+```math
 y=2^{63}
-$$
+```
 gives:
 
-$$
+```math
 L_{30}^{-1}(2^{63})
 =
 2^{63}\oplus2^{33}\oplus2^3,
-$$
+```
 which is exactly:
 
 ```text
@@ -346,43 +346,43 @@ The three-bit alpha is particularly strong because its post-shift difference is 
 
 Let the first multiplication constant be the odd integer:
 
-$$
+```math
 C_1=\texttt{0xbf58476d1ce4e5b9}.
-$$
+```
 For any 64-bit value $u$, toggling bit 63 is equivalent modulo $2^{64}$ to adding $2^{63}$:
 
-$$
+```math
 u\oplus2^{63}
 \equiv u+2^{63}\pmod{2^{64}}.
-$$
+```
 Multiplication gives:
 
-$$
+```math
 C_1(u+2^{63})
 \equiv C_1u+C_1 2^{63}\pmod{2^{64}}.
-$$
+```
 Since $C_1$ is odd:
 
-$$
+```math
 C_1 2^{63}
 \equiv2^{63}\pmod{2^{64}}.
-$$
+```
 Therefore, the two multiplication outputs differ exactly in the most significant bit:
 
-$$
+```math
 (C_1u)
 \oplus
 (C_1(u\oplus2^{63}))
 =
 2^{63}.
-$$
+```
 This exact property is special to the most-significant-bit difference. Multiplication by an odd integer is not generally linear with respect to XOR differences; for other differences, carry behavior depends on the input value.
 
 After the following XOR-shift by 27, the difference becomes:
 
-$$
+```math
 2^{63}\oplus2^{36}.
-$$
+```
 Numerically:
 
 ```text
@@ -401,18 +401,18 @@ The second multiplication is where the main probabilistic carry-dependent branch
 
 For each alpha, the program generated:
 
-$$
+```math
 2^{25}=33,554,432
-$$
+```
 values of:
 
-$$
+```math
 \beta_x
 =
 \operatorname{Mix13}(x)
 \oplus
 \operatorname{Mix13}(x\oplus\alpha).
-$$
+```
 Every complete 64-bit beta was stored in memory.
 
 The vector was then sorted. Equal adjacent values were run-counted to obtain exact frequencies within the discovery dataset.
@@ -429,13 +429,13 @@ The 16 most frequent beta values were retained.
 
 Discovery memory usage was approximately:
 
-$$
+```math
 2^{25}\cdot8
 =
 2^{28}\text{ bytes}
 =
 256\text{ MiB}.
-$$
+```
 ### 7.2 Phase 2: Fixed-candidate validation
 
 After discovery, the candidate beta values were fixed.
@@ -444,11 +444,11 @@ The validation phase did not search for new candidates and did not change beta v
 
 For every validation input, the program computed:
 
-$$
+```math
 \operatorname{Mix13}(x)
 \oplus
 \operatorname{Mix13}(x\oplus\alpha)
-$$
+```
 and incremented a counter only when the result matched one of the 16 preselected beta values.
 
 ### 7.3 Validation campaigns
@@ -464,9 +464,9 @@ Campaign 4: fmix64(counter XOR mask)
 
 Each campaign processed:
 
-$$
+```math
 2^{30}=1,073,741,824
-$$
+```
 inputs.
 
 Within each campaign, the input-generation map is bijective over 64-bit words, so distinct counters produce distinct inputs.
@@ -524,11 +524,11 @@ log2(p)    = -17.843601
 
 The 95% Wilson interval was:
 
-$$
+```math
 4.190268280500\times10^{-6}
 \le p\le
 4.313601227463\times10^{-6}.
-$$
+```
 The four campaign counts were:
 
 ```text
@@ -565,11 +565,11 @@ log2(p)    = -11.215979
 
 The 95% Wilson interval was:
 
-$$
+```math
 4.197789450425\times10^{-4}
 \le p\le
 4.210050678165\times10^{-4}.
-$$
+```
 The four campaign counts were:
 
 ```text
@@ -590,9 +590,9 @@ log2(p)    = -11.217226
 
 The next fourteen validated candidates formed a cluster close to:
 
-$$
+```math
 2^{-12.214}.
-$$
+```
 This repeated probability structure indicates that the distribution is organized into carry-dependent families rather than containing one isolated anomalous beta.
 
 ### 8.4 Strong three-bit result
@@ -620,11 +620,11 @@ log2(p)    = -9.998866
 
 The 95% Wilson interval was:
 
-$$
+```math
 9.763965603782\times10^{-4}
 \le p\le
 9.782655488696\times10^{-4}.
-$$
+```
 The four campaign counts were:
 
 ```text
@@ -661,22 +661,22 @@ were:
 
 The combined hit count was:
 
-$$
+```math
 33,557,348.
-$$
+```
 The combined probability was:
 
-$$
+```math
 \frac{33,557,348}{2^{32}}
 =
 0.007813178934
 \approx2^{-6.999875}.
-$$
+```
 This is effectively:
 
-$$
+```math
 2^{-7}.
-$$
+```
 Consequently, approximately one input pair in 128 produced one of these eight exact 64-bit output differences.
 
 A second cluster of candidates appeared near $2^{-11}$, showing another approximate factor-of-two probability tier.
@@ -689,29 +689,29 @@ Using the strongest validated beta for each tested alpha:
 
 ### 10.1 Three-bit versus strong two-bit alpha
 
-$$
+```math
 \frac{9.773306082934\times10^{-4}}
      {4.203915596008\times10^{-4}}
 \approx2.325.
-$$
+```
 The leading three-bit differential is approximately 2.3 times more probable than the leading two-bit differential.
 
 ### 10.2 Strong two-bit versus original alpha
 
-$$
+```math
 \frac{4.203915596008\times10^{-4}}
      {4.251487553120\times10^{-6}}
 \approx98.88.
-$$
+```
 The stronger two-bit differential is approximately 99 times more probable than the strongest validated candidate for the original alpha.
 
 ### 10.3 Three-bit versus original alpha
 
-$$
+```math
 \frac{9.773306082934\times10^{-4}}
      {4.251487553120\times10^{-6}}
 \approx229.87.
-$$
+```
 The leading three-bit differential is approximately 230 times more probable than the strongest validated candidate for the original alpha.
 
 ---
@@ -726,9 +726,9 @@ Two output differences may both have Hamming weight close to 32 while representi
 
 Differential analysis instead asks:
 
-$$
+```math
 \text{Does the same exact 64-bit output difference recur unusually often?}
-$$
+```
 Mix13 can produce broad bit diffusion and still exhibit highly concentrated exact XOR-difference distributions.
 
 The present results therefore do not contradict good avalanche measurements. They show that avalanche behavior is insufficient as a test of differential uniformity.
@@ -770,9 +770,9 @@ near $2^{-10}$.
 
 However, the program did not search all:
 
-$$
+```math
 2^{64}-1
-$$
+```
 nonzero input differences. It therefore does not prove that $2^{-10}$ is the global maximum differential probability of Mix13.
 
 The defensible wording is:
@@ -905,15 +905,15 @@ Output difference:
 
 with measured probability:
 
-$$
+```math
 9.773306082934\times10^{-4}
 \approx2^{-9.998866}.
-$$
+```
 Seven additional exact output differences for the same input difference also occur individually near $2^{-10}$. Together, the leading eight-member cluster occurs with probability approximately:
 
-$$
+```math
 2^{-7}.
-$$
+```
 The strongest tested two-bit input difference is:
 
 ```text
@@ -922,9 +922,9 @@ The strongest tested two-bit input difference is:
 
 with a leading exact differential near:
 
-$$
+```math
 2^{-11.216}.
-$$
+```
 These findings are far above the approximately $2^{-64}$ fixed-pair reference scale of an ideal 64-bit permutation. They establish a clear differential distinguishability weakness in Mix13.
 
 The analysis is statistically compelling but should not be overstated as a proof of the global maximum differential probability. A complete global result would require either an exact analytical derivation or a substantially broader exhaustive strategy.
