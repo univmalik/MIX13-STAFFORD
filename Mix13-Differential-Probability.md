@@ -409,9 +409,9 @@ values of:
 ```math
 \beta_x
 =
-\operatorname{Mix13}(x)
+\mathrm{Mix13}(x)
 \oplus
-\operatorname{Mix13}(x\oplus\alpha).
+\mathrm{Mix13}(x\oplus\alpha).
 ```
 Every complete 64-bit beta was stored in memory.
 
@@ -445,9 +445,9 @@ The validation phase did not search for new candidates and did not change beta v
 For every validation input, the program computed:
 
 ```math
-\operatorname{Mix13}(x)
+\mathrm{Mix13}(x)
 \oplus
-\operatorname{Mix13}(x\oplus\alpha)
+\mathrm{Mix13}(x\oplus\alpha)
 ```
 and incremented a counter only when the result matched one of the 16 preselected beta values.
 
