@@ -1,0 +1,116 @@
+SWIRL512 Round-2 Extended Statistical Analysis
+===============================================
+Input alpha: lane 0 = 0x8000000200000008, lanes 1..7 = 0
+Samples: 2^26 = 67108864
+Threads: 4
+
+Sample generation done in 99.8s
+
+=== T1: Exact 512-bit Δ2 collision count (via 64-bit hash) ===
+
+  Sort time: 5.6s
+  Unconditioned:
+    Samples:                67108864
+    Distinct hashes:        67108864
+    Hash collisions:        0
+    Max count for any hash: 1
+    Expected (uniform 64-bit hash): 0.0002
+  Conditioned on round-1 cluster:
+    Samples:                524267 (cluster events)
+    Distinct hashes:        524267
+    Hash collisions:        0
+    Max count for any hash: 1
+    Expected (uniform):     0.000000
+
+=== T2: Per-lane Δ2 collision count ===
+
+  Lane 0: uncond collisions=0 (expected 0.0002), max=1;  cond collisions=0 (expected 0.000000), max=1
+  Lane 1: uncond collisions=0 (expected 0.0002), max=1;  cond collisions=0 (expected 0.000000), max=1
+  Lane 2: uncond collisions=0 (expected 0.0002), max=1;  cond collisions=0 (expected 0.000000), max=1
+  Lane 3: uncond collisions=0 (expected 0.0002), max=1;  cond collisions=0 (expected 0.000000), max=1
+  Lane 4: uncond collisions=0 (expected 0.0002), max=1;  cond collisions=0 (expected 0.000000), max=1
+  Lane 5: uncond collisions=0 (expected 0.0002), max=1;  cond collisions=0 (expected 0.000000), max=1
+  Lane 6: uncond collisions=0 (expected 0.0002), max=1;  cond collisions=0 (expected 0.000000), max=1
+  Lane 7: uncond collisions=0 (expected 0.0002), max=1;  cond collisions=0 (expected 0.000000), max=1
+
+=== T3: Per-bit bias (512 bits) ===
+
+  Unconditioned (N=67108864):
+    Expected count per bit: 33554432.0
+    Sigma:                  4096.0
+    Max |z| over 512 bits:  2.8899 at bit 435 (lane 6, bit 51)
+    4-sigma threshold:      4.0  (significant if exceeded)
+  Conditioned on cluster (N=524267):
+    Expected count per bit: 262133.5
+    Sigma:                  362.0
+    Max |z| over 512 bits:  3.1282 at bit 179 (lane 2, bit 51)
+
+=== T4: Per-byte chi-square (64 positions × 256 values, 255 dof) ===
+
+  Unconditioned (N=67108864):
+    Expected per bucket:    262144.0
+    Max chi2 over 64 bytes: 329.21 at byte position 7 (lane 0, byte 7)
+    Critical (p=0.001):     330.52
+    Verdict:                no significant bias
+  Conditioned on cluster (N=524267):
+    Expected per bucket:    2047.9
+    Max chi2 over 64 bytes: 313.19 at byte position 35 (lane 4, byte 3)
+    Critical (p=0.001):     330.52
+    Verdict:                no significant bias
+
+=== T5: Hamming weight distribution ===
+
+  Unconditioned (N=67108864):
+    Expected mean:   256.000  (Binomial(512, 0.5))
+    Expected std:    11.314
+    Observed mean:   256.000
+    Observed std:    11.314
+    Observed range:  [195, 319]
+  Conditioned on cluster (N=524267):
+    Expected mean:   256.000
+    Expected std:    11.314
+    Observed mean:   256.013
+    Observed std:    11.303
+    Observed range:  [205, 308]
+
+=== T6: Truncated differentials per lane (8-bit and 16-bit prefixes) ===
+
+  Unconditioned (N=67108864):
+    Lane | top-1 8-bit (count, log2 p) | top-1 16-bit (count, log2 p)
+    ---------------------------------------------------------------
+       0 | 0x43 (263501, -7.9926 vs ideal -8.000) | 0x590D (1169, -15.8089 vs ideal -16.000)
+       1 | 0xF8 (263594, -7.9920 vs ideal -8.000) | 0xC3AA (1162, -15.8176 vs ideal -16.000)
+       2 | 0xFE (263543, -7.9923 vs ideal -8.000) | 0x3CB0 (1162, -15.8176 vs ideal -16.000)
+       3 | 0x28 (263457, -7.9928 vs ideal -8.000) | 0xEF4C (1164, -15.8151 vs ideal -16.000)
+       4 | 0xF1 (263522, -7.9924 vs ideal -8.000) | 0xBD00 (1186, -15.7881 vs ideal -16.000)
+       5 | 0x14 (263629, -7.9919 vs ideal -8.000) | 0xA465 (1168, -15.8102 vs ideal -16.000)
+       6 | 0xAF (263412, -7.9930 vs ideal -8.000) | 0x88E1 (1162, -15.8176 vs ideal -16.000)
+       7 | 0xD9 (263549, -7.9923 vs ideal -8.000) | 0xC935 (1157, -15.8238 vs ideal -16.000)
+
+  Conditioned on cluster (N=524267):
+    Lane | top-1 8-bit (count, log2 p) | top-1 16-bit (count, log2 p)
+    ---------------------------------------------------------------
+       0 | 0x4A (2162, -7.9218 vs ideal -8.000) | 0xBC44 (24, -14.4150 vs ideal -16.000)
+       1 | 0x34 (2159, -7.9238 vs ideal -8.000) | 0x09AD (24, -14.4150 vs ideal -16.000)
+       2 | 0x9F (2171, -7.9158 vs ideal -8.000) | 0x4F00 (23, -14.4764 vs ideal -16.000)
+       3 | 0x22 (2198, -7.8980 vs ideal -8.000) | 0x944C (25, -14.3561 vs ideal -16.000)
+       4 | 0x35 (2175, -7.9131 vs ideal -8.000) | 0x7723 (21, -14.6076 vs ideal -16.000)
+       5 | 0x82 (2172, -7.9151 vs ideal -8.000) | 0x3CF5 (26, -14.2995 vs ideal -16.000)
+       6 | 0x4F (2154, -7.9271 vs ideal -8.000) | 0x8BAF (23, -14.4764 vs ideal -16.000)
+       7 | 0x22 (2161, -7.9225 vs ideal -8.000) | 0x1B6B (24, -14.4150 vs ideal -16.000)
+
+=== Final Summary ===
+
+Total samples:           67108864 (2^26)
+Round-1 cluster events:  524267 (expected ~524288, ratio 0.007812 vs ideal 2^-7=0.007812)
+  Per rank: 65455 65702 65216 65594 65338 65704 65527 65731 
+
+Test results:
+  T1 Exact Δ2 collisions (uncond):  0 (expected 0.0002 from 64-bit hash)
+  T1 Exact Δ2 collisions (cond):    0 (expected 0.0000)
+  T3 Max bit bias |z| (uncond):     2.8899  (4-sigma = significant)
+  T3 Max bit bias |z| (cond):       3.1282
+  T4 Max byte chi2 (uncond):        329.21  (crit p=0.001: 330.52)
+  T4 Max byte chi2 (cond):          313.19  (crit p=0.001: 330.52)
+  T5 HW mean (uncond):              256.000  (expected 256.000)
+  T5 HW std (uncond):               11.314  (expected 11.314)
